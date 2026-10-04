@@ -2,6 +2,11 @@
 
 **Student:** Amna Pervez
 
+## Live project
+
+- Live website: https://tsg-webdev-p02-amna-pervez.vercel.app
+- GitHub repository: https://github.com/amnaparvez8910/tsg-webdev-p02-amna-pervez
+
 ## Business concept
 Angaar is a fictional live-fire Pakistani restaurant concept based in Lahore, created for The Sky Gen Web Development Project 02. The landing page presents charcoal BBQ, traditional karahi, group-dining packages and catering services while guiding visitors from the hero section to menu exploration, package selection and a demo table-booking form. Angaar is an educational concept and does not represent a real restaurant or business listing.
 
