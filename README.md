@@ -23,9 +23,6 @@ HTML5, CSS3, JavaScript, Bootstrap 5, Google Fonts and Google Maps Embed. CSS an
 ## Run locally
 Open `index.html` or use VS Code Live Server. Internet access is required for Google Fonts, Bootstrap and Google Maps.
 
-## Deployment
-Upload the complete folder to a public GitHub repository, then deploy it with Netlify or Vercel. No build command is required.
-
 ## Asset credits
 All food images were generated specifically for this educational project using an AI image tool. Google Fonts, Bootstrap 5 and Google Maps are used through their official web services.
 
