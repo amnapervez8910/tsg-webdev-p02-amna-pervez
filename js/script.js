@@ -59,15 +59,22 @@ bootstrap/js/dist/collapse.js:
     *)
 */
 
+// Read viewport media flags before changing DOM content.
+// Avoid a synchronous full layout from reading innerWidth after menu/stat writes.
+const angaarMobile=matchMedia('(max-width:768px)').matches;
+const angaarDesktop=matchMedia('(min-width:901px)').matches;
+const angaarReducedMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const angaarHover=matchMedia('(hover:hover)').matches;
+
 // Lightweight embers: static on phones, capped at 30fps on larger screens
 (()=>{
- if(matchMedia('(max-width:768px)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+ if(angaarMobile||angaarReducedMotion)return;
  const c=document.getElementById('embers'),ctx=c.getContext('2d');
  let w=0,h=0;const resize=()=>{w=c.width=innerWidth;h=c.height=innerHeight};resize();
  addEventListener('resize',resize,{passive:true});
  const make=(fromBottom=false)=>({x:Math.random()*w,y:fromBottom?h+6:Math.random()*h,r:Math.random()*1.8+.6,v:Math.random()*.55+.25,a:Math.random()*.55+.25,d:Math.random()*6.28});
  const paint=p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.29);ctx.fillStyle=`rgba(255,${130+(p.r*35|0)},45,${p.a})`;ctx.fill()};
- if(matchMedia('(max-width:768px)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches){
+ if(angaarMobile||angaarReducedMotion){
   Array.from({length:18},()=>make()).forEach(paint);return;
  }
  let mx=-999,my=-999,last=0,running=true;const particles=Array.from({length:42},()=>make());
@@ -115,7 +122,7 @@ setTimeout(hideLoader,250);
 // Keep the hidden fixed overlay in place to avoid a second document-wide style invalidation.
 
 // Scroll reveal + counters
-const animateReveals=matchMedia('(min-width:769px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
+const animateReveals=!angaarMobile&&!angaarReducedMotion;
 if(animateReveals)document.querySelectorAll('.dish,.slip,h2,.stat,.mi,.slider').forEach(el=>el.classList.add('rv'));
 else document.querySelectorAll('.stat b[data-n]').forEach(b=>{b.textContent=(+b.dataset.n).toLocaleString('en',{minimumFractionDigits:+(b.dataset.d||0),maximumFractionDigits:+(b.dataset.d||0)})+(b.hasAttribute('data-plus')?'+':'')});
 const io=new IntersectionObserver(es=>es.forEach(e=>{
@@ -124,7 +131,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
 }),{threshold:.2});
 const observe=()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
 function count(b){
- if(matchMedia('(max-width:768px)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches){b.textContent=(+b.dataset.n).toLocaleString('en',{minimumFractionDigits:+(b.dataset.d||0),maximumFractionDigits:+(b.dataset.d||0)})+(b.hasAttribute('data-plus')?'+':'');return}
+ if(angaarMobile||angaarReducedMotion){b.textContent=(+b.dataset.n).toLocaleString('en',{minimumFractionDigits:+(b.dataset.d||0),maximumFractionDigits:+(b.dataset.d||0)})+(b.hasAttribute('data-plus')?'+':'');return}
 
  const t=+b.dataset.n,d=+(b.dataset.d||0),pl=b.hasAttribute('data-plus')?'+':'';let st=null;
  (function f(ts){st=st||ts;const p=Math.min((ts-st)/1600,1);
@@ -186,10 +193,10 @@ document.getElementById('send').onclick=e=>{
 };
 
 // ---- Lightweight desktop-only parallax and cursor glow ----
-if(innerWidth>900&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+if(angaarDesktop&&!angaarReducedMotion){
  const pc=document.querySelector('.hero .container');let parallaxTick=false;
  addEventListener('scroll',()=>{if(parallaxTick||scrollY>=innerHeight)return;parallaxTick=true;requestAnimationFrame(()=>{pc.style.transform=`translateY(${scrollY*.16}px)`;pc.style.opacity=1-scrollY/(innerHeight*.9);parallaxTick=false})},{passive:true});
- if(matchMedia('(hover:hover)').matches){const g=document.getElementById('glow');addEventListener('pointermove',e=>{g.style.opacity=1;g.style.transform=`translate(${e.clientX}px,${e.clientY}px)`},{passive:true})}
+ if(angaarHover){const g=document.getElementById('glow');addEventListener('pointermove',e=>{g.style.opacity=1;g.style.transform=`translate(${e.clientX}px,${e.clientY}px)`},{passive:true})}
 }
 
 // Load the map only when a visitor approaches it, not during initial page load.
