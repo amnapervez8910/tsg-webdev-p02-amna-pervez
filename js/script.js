@@ -61,8 +61,9 @@ bootstrap/js/dist/collapse.js:
 
 // Lightweight embers: static on phones, capped at 30fps on larger screens
 (()=>{
+ if(matchMedia('(max-width:768px)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
  const c=document.getElementById('embers'),ctx=c.getContext('2d');
- let w=0,h=0;const resize=()=>{w=c.width=c.offsetWidth;h=c.height=c.offsetHeight};resize();
+ let w=0,h=0;const resize=()=>{w=c.width=innerWidth;h=c.height=innerHeight};resize();
  addEventListener('resize',resize,{passive:true});
  const make=(fromBottom=false)=>({x:Math.random()*w,y:fromBottom?h+6:Math.random()*h,r:Math.random()*1.8+.6,v:Math.random()*.55+.25,a:Math.random()*.55+.25,d:Math.random()*6.28});
  const paint=p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.29);ctx.fillStyle=`rgba(255,${130+(p.r*35|0)},45,${p.a})`;ctx.fill()};
@@ -88,14 +89,17 @@ document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
 
 // Slider
 const track=document.getElementById('track'),n=track.children.length,dots=document.getElementById('dots');
-let i=0,timer;
+let i=0,timer,reviewVisible=false;
 for(let k=0;k<n;k++){const b=document.createElement('button');b.setAttribute('aria-label','Review '+(k+1));b.onclick=()=>go(k);dots.appendChild(b)}
 function go(k){
  i=(k+n)%n;track.style.transform=`translateX(-${i*100}%)`;
  [...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i));
- clearInterval(timer);timer=setInterval(()=>go(i+1),6500);
+ clearInterval(timer);if(reviewVisible&&!document.hidden)timer=setInterval(()=>go(i+1),6500);
 }
-prev.onclick=()=>go(i-1);next.onclick=()=>go(i+1);go(0);
+prev.onclick=()=>go(i-1);next.onclick=()=>go(i+1);dots.firstElementChild.classList.add('on');
+const reviewObserver=new IntersectionObserver(entries=>{reviewVisible=entries[0].isIntersecting;clearInterval(timer);if(reviewVisible&&!document.hidden)timer=setInterval(()=>go(i+1),6500)},{threshold:.1});
+reviewObserver.observe(document.getElementById('reviews'));
+document.addEventListener('visibilitychange',()=>{clearInterval(timer);if(reviewVisible&&!document.hidden)timer=setInterval(()=>go(i+1),6500)});
 
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{
@@ -108,10 +112,12 @@ document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()
 const hideLoader=()=>document.getElementById('loader').classList.add('done');
 // Brief brand introduction, independent of map/images/font downloads.
 setTimeout(hideLoader,250);
-setTimeout(()=>document.getElementById('loader').remove(),650);
+// Keep the hidden fixed overlay in place to avoid a second document-wide style invalidation.
 
 // Scroll reveal + counters
-document.querySelectorAll('.dish,.slip,h2,.stat,.mi,.slider').forEach(el=>el.classList.add('rv'));
+const animateReveals=matchMedia('(min-width:769px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(animateReveals)document.querySelectorAll('.dish,.slip,h2,.stat,.mi,.slider').forEach(el=>el.classList.add('rv'));
+else document.querySelectorAll('.stat b[data-n]').forEach(b=>{b.textContent=(+b.dataset.n).toLocaleString('en',{minimumFractionDigits:+(b.dataset.d||0),maximumFractionDigits:+(b.dataset.d||0)})+(b.hasAttribute('data-plus')?'+':'')});
 const io=new IntersectionObserver(es=>es.forEach(e=>{
  if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
  const b=e.target.querySelector('b[data-n]');if(b)count(b);
@@ -135,7 +141,7 @@ const MENU={
 };
 const tabs=document.getElementById('tabs'),items=document.getElementById('items');
 function show(k){
- [...tabs.children].forEach(b=>b.classList.toggle('on',b.textContent===k));
+ [...tabs.children].forEach(b=>{const selected=b.textContent===k;b.classList.toggle('on',selected);b.setAttribute('aria-pressed',String(selected))});
  items.innerHTML=MENU[k].map(([n,d,p])=>`<div class="mi rv in"><div><h3>${n}</h3><p>${d}</p></div><span class="dots-l"></span><span class="pr">${p}</span><button class="add" data-n="${n}" data-p="${p}" aria-label="Add ${n} to order">+</button></div>`).join('');
 }
 Object.keys(MENU).forEach(k=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>show(k);tabs.appendChild(b)});
@@ -192,6 +198,6 @@ if(locationMap){
  const loadMap=()=>{locationMap.src=locationMap.dataset.src;delete locationMap.dataset.src};
  if('IntersectionObserver' in window){
   const mapObserver=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){loadMap();mapObserver.disconnect()}},{rootMargin:'300px'});
-  mapObserver.observe(locationMap);
+  mapObserver.observe(document.getElementById('contact'));
  }else loadMap();
 }
