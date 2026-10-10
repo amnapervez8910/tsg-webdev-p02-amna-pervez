@@ -97,13 +97,16 @@ document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
 // Slider
 const track=document.getElementById('track'),n=track.children.length,dots=document.getElementById('dots');
 let i=0,timer,reviewVisible=false;
-for(let k=0;k<n;k++){const b=document.createElement('button');b.setAttribute('aria-label','Review '+(k+1));b.onclick=()=>go(k);dots.appendChild(b)}
+// Legacy-HTML fallback permits updating script.js before index.html.
+if(!dots.children.length){for(let k=0;k<n;k++){const button=document.createElement('button');button.type='button';button.setAttribute('aria-label','Review '+(k+1));if(k===0)button.classList.add('on');dots.appendChild(button)}}
+// Dot markup is already rendered in HTML; only bind interactions.
+[...dots.children].forEach((button,index)=>button.addEventListener('click',()=>go(index)));
 function go(k){
  i=(k+n)%n;track.style.transform=`translateX(-${i*100}%)`;
  [...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i));
  clearInterval(timer);if(reviewVisible&&!document.hidden)timer=setInterval(()=>go(i+1),6500);
 }
-prev.onclick=()=>go(i-1);next.onclick=()=>go(i+1);dots.firstElementChild.classList.add('on');
+prev.onclick=()=>go(i-1);next.onclick=()=>go(i+1);
 const reviewObserver=new IntersectionObserver(entries=>{reviewVisible=entries[0].isIntersecting;clearInterval(timer);if(reviewVisible&&!document.hidden)timer=setInterval(()=>go(i+1),6500)},{threshold:.1});
 reviewObserver.observe(document.getElementById('reviews'));
 document.addEventListener('visibilitychange',()=>{clearInterval(timer);if(reviewVisible&&!document.hidden)timer=setInterval(()=>go(i+1),6500)});
@@ -124,7 +127,8 @@ setTimeout(hideLoader,250);
 // Scroll reveal + counters
 const animateReveals=!angaarMobile&&!angaarReducedMotion;
 if(animateReveals)document.querySelectorAll('.dish,.slip,h2,.stat,.mi,.slider').forEach(el=>el.classList.add('rv'));
-else document.querySelectorAll('.stat b[data-n]').forEach(b=>{b.textContent=(+b.dataset.n).toLocaleString('en',{minimumFractionDigits:+(b.dataset.d||0),maximumFractionDigits:+(b.dataset.d||0)})+(b.hasAttribute('data-plus')?'+':'')});
+// Only old HTML needs this fallback; new HTML has complete mobile stats.
+else document.querySelectorAll('.stat b[data-n]').forEach(b=>{if(b.textContent.trim()!=='0')return;b.textContent=(+b.dataset.n).toLocaleString('en',{minimumFractionDigits:+(b.dataset.d||0),maximumFractionDigits:+(b.dataset.d||0)})+(b.hasAttribute('data-plus')?'+':'')});
 const io=new IntersectionObserver(es=>es.forEach(e=>{
  if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
  const b=e.target.querySelector('b[data-n]');if(b)count(b);
@@ -151,8 +155,12 @@ function show(k){
  [...tabs.children].forEach(b=>{const selected=b.textContent===k;b.classList.toggle('on',selected);b.setAttribute('aria-pressed',String(selected))});
  items.innerHTML=MENU[k].map(([n,d,p])=>`<div class="mi rv in"><div><h3>${n}</h3><p>${d}</p></div><span class="dots-l"></span><span class="pr">${p}</span><button class="add" data-n="${n}" data-p="${p}" aria-label="Add ${n} to order">+</button></div>`).join('');
 }
-Object.keys(MENU).forEach(k=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>show(k);tabs.appendChild(b)});
-show('BBQ');observe();
+// Legacy-HTML fallback; new HTML avoids both initial DOM construction steps.
+if(!tabs.children.length){Object.keys(MENU).forEach(k=>{const button=document.createElement('button');button.type='button';button.textContent=k;tabs.appendChild(button)})}
+if(!items.children.length)show('BBQ');
+// Initial buttons/menu are HTML. Update rows only after a visitor changes category.
+[...tabs.children].forEach(button=>button.addEventListener('click',()=>show(button.textContent)));
+observe();
 
 // Validate booking request and show confirmation
 document.getElementById('form').addEventListener('submit',e=>{
