@@ -41,10 +41,10 @@
 </header>
 
 <div class="stats"><div class="container"><div class="row g-4 text-center">
- <div class="col-6 col-md-3 stat"><b data-n="12">0</b><span>years on charcoal</span></div>
- <div class="col-6 col-md-3 stat"><b data-n="250000" data-plus>0</b><span>kababs grilled</span></div>
- <div class="col-6 col-md-3 stat"><b data-n="48" data-plus>0</b><span>chefs and grill masters</span></div>
- <div class="col-6 col-md-3 stat"><b data-n="4.9" data-d="1">0</b><span>average rating</span></div>
+ <div class="col-6 col-md-3 stat"><b data-n="12">12</b><span>years on charcoal</span></div>
+ <div class="col-6 col-md-3 stat"><b data-n="250000" data-plus>250,000+</b><span>kababs grilled</span></div>
+ <div class="col-6 col-md-3 stat"><b data-n="48" data-plus>48+</b><span>chefs and grill masters</span></div>
+ <div class="col-6 col-md-3 stat"><b data-n="4.9" data-d="1">4.9</b><span>average rating</span></div>
 </div></div></div>
 
 <section id="dishes">
@@ -65,8 +65,8 @@
 <section id="menu-board">
  <div class="container" style="max-width:860px">
   <h2 class="mb-4 rv">The menu board</h2>
-  <div class="tabs" id="tabs" role="group" aria-label="Menu categories"></div>
-  <div id="items"></div>
+  <div class="tabs" id="tabs" role="group" aria-label="Menu categories"><button type="button" aria-pressed="true" class="on">BBQ</button><button type="button" aria-pressed="false">Karahi</button><button type="button" aria-pressed="false">Breads &amp; Sides</button><button type="button" aria-pressed="false">Drinks</button></div>
+  <div id="items"><div class="mi rv in"><div><h3>Chicken Malai Boti</h3><p>Creamy, charred, melts in the mouth</p></div><span class="dots-l"></span><span class="pr">Rs 1,150</span><button class="add" data-n="Chicken Malai Boti" data-p="Rs 1,150" aria-label="Add Chicken Malai Boti to order">+</button></div><div class="mi rv in"><div><h3>Beef Seekh Kabab</h3><p>Hand-minced, ginger and green chili</p></div><span class="dots-l"></span><span class="pr">Rs 1,050</span><button class="add" data-n="Beef Seekh Kabab" data-p="Rs 1,050" aria-label="Add Beef Seekh Kabab to order">+</button></div><div class="mi rv in"><div><h3>Chicken Tikka Leg</h3><p>Smoky, spicy, bone-in</p></div><span class="dots-l"></span><span class="pr">Rs 650</span><button class="add" data-n="Chicken Tikka Leg" data-p="Rs 650" aria-label="Add Chicken Tikka Leg to order">+</button></div></div>
   <div class="cart" id="cart" hidden>
    <h3 class="h4">Your order</h3><div id="cl"></div>
    <div class="tot"><span>Total</span><span id="tot">Rs 0</span></div>
@@ -112,7 +112,7 @@
     <article class="slide"><div class="review-stars">★★★★★</div><blockquote>“We booked the Special for thirty people. Everything arrived hot and nobody went home hungry.”</blockquote><div class="reviewer"><div class="reviewer-avatar">UR</div><div class="reviewer-info"><strong>Usman R.</strong><span>Birthday dawat • Group of 30</span></div></div></article>
     <article class="slide"><div class="review-stars">★★★★★</div><blockquote>“Best karahi outside my grandmother’s kitchen—and the naan is unreal.”</blockquote><div class="reviewer"><div class="reviewer-avatar">HS</div><div class="reviewer-info"><strong>Hamza S.</strong><span>First visit • Now a regular</span></div></div></article>
    </div></div>
-   <div class="review-bottom"><span class="review-note">Three stories from around Lahore</span><div class="review-controls"><button class="arrow" id="prev" aria-label="Previous review"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button><div class="dots" id="dots"></div><button class="arrow" id="next" aria-label="Next review"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
+   <div class="review-bottom"><span class="review-note">Three stories from around Lahore</span><div class="review-controls"><button class="arrow" id="prev" aria-label="Previous review"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button><div class="dots" id="dots"><button type="button" aria-label="Review 1" class="on"></button><button type="button" aria-label="Review 2"></button><button type="button" aria-label="Review 3"></button></div><button class="arrow" id="next" aria-label="Next review"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
   </div>
  </div>
 </section>
