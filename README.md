@@ -1,69 +1,91 @@
 # Angaar — Responsive Restaurant Landing Page
 
-**Student:** Amna Pervez  
+**Author:** Amna Pervez  
 **Project:** The Sky Gen — Web Development Project 02
 
 ## Business concept
-Angaar is a fictional Pakistani live-fire restaurant brand centred on charcoal BBQ, tandoori breads and iron-wok karahi. The landing page introduces its food and services, presents dining packages and customer testimonials, and guides visitors towards a booking enquiry. The dark charcoal palette, ember-orange buttons, gold accents and Urdu headline give the brand a distinct visual identity. This is an educational front-end project, not an operational restaurant booking system.
+Angaar is a restaurant-brand concept inspired by Pakistani live-fire cooking. Its landing page showcases charcoal BBQ, tandoori breads, iron-wok karahi and dining packages, with a clear flow from discovering the food to making a booking enquiry. A charcoal-navy background, ember-orange calls to action, gold typography and Urdu branding establish the visual identity.
 
-## Links
-- Live website: https://tsg-webdev-p02-amna-pervez.vercel.app/
-- GitHub: https://github.com/amnaparvez8910/tsg-webdev-p02-amna-pervez
-- PageSpeed Insights Mobile report: https://pagespeed.web.dev/analysis/https-tsg-webdev-p02-amna-pervez-vercel-app/roaavhp7vp?form_factor=mobile
+## Project links
+- **Live website:** https://tsg-webdev-p02-amna-pervez.vercel.app/
+- **GitHub repository:** https://github.com/amnapervez8910/tsg-webdev-p02-amna-pervez
+- **Mobile Lighthouse report (PageSpeed Insights):** https://pagespeed.web.dev/analysis/https-tsg-webdev-p02-amna-pervez-vercel-app/roaavhp7vp?form_factor=mobile
 
 ## Features
-- Sticky navigation, smooth section scrolling and active-link highlighting.
+- Sticky navigation with smooth scrolling and active-link highlighting.
 - Responsive hamburger menu with an accessible expanded-state indicator.
-- Image-backed hero with English/Urdu branding and a booking CTA.
-- Six food/service cards with hover styling.
-- Three dining packages with feature lists and a highlighted recommended option.
-- Testimonials slider with arrows and navigation dots.
-- JavaScript FAQ accordion.
-- Contact/booking form with client-side validation and confirmation.
-- Embedded Google Map, loaded when the contact section approaches the viewport.
+- Hero background image, English/Urdu headline, supporting text and booking CTA.
+- Six food/service cards with icons and hover effects.
+- Three dining packages with feature lists and a highlighted recommended plan.
+- Testimonials slider with three reviews, arrows and navigation dots.
+- Five-question JavaScript FAQ accordion.
+- Contact form with client-side validation and an embedded Google Map.
 - Footer with business information, quick links and social icons.
-- Interactive menu categories and a client-side order-summary builder.
-- Responsive layouts for mobile, tablet and desktop; sticky booking links on smaller screens.
+- Responsive mobile, tablet and desktop layouts.
+- Menu-category switching, a client-side order summary and mobile booking links.
 
 ## Technology
-HTML5, CSS3, JavaScript, Bootstrap 5 CSS, Git/GitHub, Vercel and Google Maps Embed. The hamburger menu, FAQ, testimonials and menu interactions use JavaScript. Bootstrap CSS supplies framework layout and form styles; the Bootstrap JavaScript bundle is not required.
+- HTML5 for page structure and semantic sections.
+- CSS3 and Bootstrap 5 CSS for layout, responsive styling and form components.
+- JavaScript for the hamburger menu, FAQ, testimonials, form validation and menu interactions.
+- Git and GitHub for version control.
+- Vercel for deployment.
+- Google Maps Embed for location presentation.
 
-## Folder structure
+Bootstrap CSS is retained; interactive controls use JavaScript without the Bootstrap JavaScript bundle. Fonts and food images are served locally. Below-the-fold images and the map are deferred, while decorative mobile effects are reduced.
+
+## Repository structure
 ```text
 index.html
-css/style.css
-js/script.js
+css/
+  style.css
+js/
+  script.js
 images/
+  hero.jpg
+  naan.jpg
+  karahi.jpg
+  seekh.jpg
+  tikka.jpg
+  chai.jpg
 README.md
 FONT-LICENSES.txt
 ```
 
-## Running locally
-Download or clone the repository. Open `index.html` in a browser, or serve the repository with a local static-file server. There is no application build step. Google Maps requires an internet connection.
+## Run locally
+Clone or download the repository and open `index.html` in a browser. A local static-file server can also be used. No application build step is required; the embedded map needs an internet connection.
 
-## Important limitations
-The booking form and cart are front-end demonstrations only. No booking or order is sent to a server, stored in a database, or delivered to restaurant staff. An on-screen confirmation demonstrates the interface rather than an actual reservation.
+## Form and order behaviour
+The contact form validates input and displays an on-screen confirmation. The order builder keeps the selected items in the current page session. These are client-side interactions: no reservation or order is sent to restaurant staff, stored in a database or processed by a backend.
 
-## Performance and responsive evidence
-The PageSpeed Insights Mobile report captured on 12 October 2026 at 8:14 PM PKT recorded:
-- Performance: 99
-- Accessibility: 96
-- Best Practices: 100
-- SEO: 100
-- FCP: 1.1 s; LCP: 2.2 s; TBT: 0 ms; CLS: 0.004; Speed Index: 2.3 s.
+## Responsive screenshots
+- `tsg-webdev-p02-amna-pervez-mobile.png` — 390 x 844.
+- `tsg-webdev-p02-amna-pervez-tablet.png` — 768 x 1024.
+- `tsg-webdev-p02-amna-pervez-desktop.png` — 1440 x 900.
 
-These are that report's lab results, not guaranteed scores for every device. A separate local Chrome DevTools test recorded Performance 59; the discrepancy remains unresolved. The Google audit flags contrast in the Packages section.
+## Lighthouse report
+PageSpeed Insights Mobile, captured on 12 October 2026 at 8:14 PM PKT:
 
-Submission screenshots use mobile 390 x 844, tablet 768 x 1024 and desktop 1440 x 900. Browser screenshots do not replace testing the website on a real phone.
+| Category | Score |
+| --- | --- |
+| Performance | 99 |
+| Accessibility | 96 |
+| Best Practices | 100 |
+| SEO | 100 |
 
-## Asset credits and licensing
-- Bootstrap 5: https://getbootstrap.com/ — MIT license.
-- Mulish: https://github.com/googlefonts/mulish
-- Aref Ruqaa: https://github.com/alif-type/aref-ruqaa
-- Rozha One: https://fonts.google.com/specimen/Rozha+One
-- Font copyright notices and SIL Open Font License text are included in `FONT-LICENSES.txt`.
-- Google Maps Embed is used for the location section.
-- Food imagery: local files `hero.jpg`, `naan.jpg`, `karahi.jpg`, `seekh.jpg`, `tikka.jpg` and `chai.jpg` in `images/`. Original image sources and usage rights have not been verified in this documentation; the author must confirm and add the appropriate credits before final submission. No Unsplash or royalty-free provenance is claimed without evidence.
+FCP: 1.1 s; LCP: 2.2 s; TBT: 0 ms; CLS: 0.004; Speed Index: 2.3 s.
 
-## Review preparation
-Be ready to explain the HTML structure, responsive CSS, navigation state, slider, FAQ, form validation and client-side limitations. Confirm real-phone behaviour and image credits before submitting.
+The report uses Lighthouse 13.5.0, emulated Moto G Power and Slow 4G throttling. These are results from the linked lab test; local browser audits can differ. The accessibility audit flags contrast in the Packages section.
+
+Report screenshot: `tsg-webdev-p02-amna-pervez-lighthouse-mobile.png`.
+
+## Asset credits
+- **Food imagery:** AI-generated restaurant-concept visuals supplied during AI-assisted project development and stored locally in `images/`. They are not presented as the author's food photography or as Unsplash photographs.
+- **Bootstrap 5:** https://getbootstrap.com/ — MIT license.
+- **Mulish:** https://github.com/googlefonts/mulish
+- **Aref Ruqaa:** https://github.com/alif-type/aref-ruqaa
+- **Rozha One:** https://fonts.google.com/specimen/Rozha+One
+- **Font licensing:** copyright notices and SIL Open Font License text are included in `FONT-LICENSES.txt`.
+- **Map:** Google Maps Embed.
+
+AI assistance was used during development and optimisation; this documentation does not claim that every line was written without assistance.
