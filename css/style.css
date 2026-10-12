@@ -168,3 +168,9 @@ section{content-visibility:auto;contain-intrinsic-size:auto var(--section-size,9
 
 .stamp{color:#92250f;border-color:#92250f}
 @media(max-width:768px),(prefers-reduced-motion:reduce){#embers{background-image:radial-gradient(circle at 12% 24%,#ffc24b 0 1px,transparent 1.6px),radial-gradient(circle at 72% 35%,#ff6a1f 0 1px,transparent 1.6px),radial-gradient(circle at 28% 68%,#ffc24b 0 1px,transparent 1.6px),radial-gradient(circle at 91% 73%,#ff6a1f 0 1px,transparent 1.6px),radial-gradient(circle at 18% 91%,#ffc24b 0 1px,transparent 1.6px);opacity:.6}}
+
+/* Mobile performance: retain the original display/Urdu branding, use a native body font. */
+@media(max-width:700px){body{font-family:Arial,Helvetica,sans-serif}.mbar a{white-space:nowrap;font-size:clamp(.875rem,3.6vw,1rem);padding:.85rem .25rem}}
+/* Stop work in the intro after it has faded out, including pseudo-element rings. */
+#loader.done *,#loader.done *::before,#loader.done *::after{animation:none!important}
+@media(max-width:360px){.hero{padding-top:78px;padding-bottom:80px;min-height:100svh}.hero .container{padding-top:0}.hero p.lead{font-size:1.05rem;line-height:1.65}.hero .urdu{font-size:1.8rem}.big{font-size:3.5rem}}
