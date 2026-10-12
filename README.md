@@ -73,7 +73,6 @@ FCP: 1.1 s; LCP: 2.2 s; TBT: 0 ms; CLS: 0.004; Speed Index: 2.3 s.
 
 The report uses Lighthouse 13.5.0, emulated Moto G Power and Slow 4G throttling. These are results from the linked lab test; local browser audits can differ. The accessibility audit flags contrast in the Packages section.
 
-Report screenshot: `tsg-webdev-p02-amna-pervez-lighthouse-mobile.png`.
 
 ## Asset credits
 - **Food imagery:** AI-generated restaurant-concept visuals supplied during AI-assisted project development and stored locally in `images/`. They are not presented as the author's food photography or as Unsplash photographs.
