@@ -54,7 +54,7 @@ Bootstrap 5.3.3 is bundled into css/style.css and js/script.js (MIT license head
 
 ## Live project
 - Live website: https://tsg-webdev-p02-amna-pervez.vercel.app
-- GitHub repository: https://github.com/amnaparvez8910/tsg-webdev-p02-amna-pervez
+- GitHub repository: https://github.com/amnapervez8910/tsg-webdev-p02-amna-pervez
 
 ## Rendering optimization
 Unused Bootstrap CSS is removed; the Bootstrap Collapse component is bundled instead of the complete JavaScript bundle. Below-fold sections use content-visibility with responsive size estimates, and mobile counters avoid continuous text animation. Lighthouse scores vary with hardware and throttling. Run a fresh audit on the production URL for submission.
