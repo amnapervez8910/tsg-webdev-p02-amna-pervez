@@ -58,10 +58,6 @@ Clone or download the repository and open `index.html` in a browser. A local sta
 ## Form and order behaviour
 The contact form validates input and displays an on-screen confirmation. The order builder keeps the selected items in the current page session. These are client-side interactions: no reservation or order is sent to restaurant staff, stored in a database or processed by a backend.
 
-## Responsive screenshots
-- `tsg-webdev-p02-amna-pervez-mobile.png` — 390 x 844.
-- `tsg-webdev-p02-amna-pervez-tablet.png` — 768 x 1024.
-- `tsg-webdev-p02-amna-pervez-desktop.png` — 1440 x 900.
 
 ## Lighthouse report
 PageSpeed Insights Mobile, captured on 12 October 2026 at 8:14 PM PKT:
