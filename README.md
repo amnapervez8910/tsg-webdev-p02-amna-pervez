@@ -84,4 +84,3 @@ Report screenshot: `tsg-webdev-p02-amna-pervez-lighthouse-mobile.png`.
 - **Font licensing:** copyright notices and SIL Open Font License text are included in `FONT-LICENSES.txt`.
 - **Map:** Google Maps Embed.
 
-AI assistance was used during development and optimisation; this documentation does not claim that every line was written without assistance.
